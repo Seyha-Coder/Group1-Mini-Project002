@@ -1,0 +1,2 @@
+rootProject.name = 'Group1-Spring-Mini-Project'
+include 'eureka-server','api-gateway','common','config-server','task-service','keycloak-admin-client'
