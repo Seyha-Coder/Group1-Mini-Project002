@@ -98,4 +98,15 @@ public class UserController {
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse> getUserById(@PathVariable String id) {
+        UserDto userDto = keycloakService.getUserById(id);
+        ApiResponse apiResponse = ApiResponse.builder()
+                .message("User get successfully.")
+                .status(HttpStatus.OK)
+                .code(200)
+                .payload(userDto)
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 }
