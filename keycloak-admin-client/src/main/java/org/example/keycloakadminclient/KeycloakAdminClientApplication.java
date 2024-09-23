@@ -29,12 +29,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
         type = SecuritySchemeType.OAUTH2,
         flows = @OAuthFlows(
                 clientCredentials = @OAuthFlow(
-                        tokenUrl ="http://localhost:8080/realms/Mini-project002/protocol/openid-connect/token"
+                        tokenUrl ="http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/token"
+                ),
+                password = @OAuthFlow(
+                        tokenUrl ="http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/token"
                 )
-//                ,
-//                password = @OAuthFlow(
-//                        tokenUrl ="http://localhost:8080/realms/Mini-project002/protocol/openid-connect/token"
-//                )
         ),
         in = SecuritySchemeIn.HEADER
 )

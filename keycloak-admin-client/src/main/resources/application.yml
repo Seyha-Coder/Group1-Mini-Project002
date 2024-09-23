@@ -5,7 +5,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/Mini-project002
+          issuer-uri: http://localhost:8080/realms/Mini-Project002
 eureka:
   client:
     service-url:
@@ -17,9 +17,9 @@ openapi:
     url: http://localhost:9090
 keycloak:
   auth-server-url: http://localhost:8080
-  realm: Mini-project002
+  realm: Mini-Project002
   clientId: mini-project
-  clientSecret: 5DOuqNonv3iLQv2TGpcYrUD5XGguNJCi
+  clientSecret: 1d9bpPexLi3bUgC8QkpzUiVLiioBzQ8k
 springdoc:
   api-docs:
     path: /keycloak-admin-client/v3/api-docs
@@ -27,7 +27,7 @@ springdoc:
     path: /keycloak-admin-client/swagger-ui.html
     oauth:
       client-id: mini-project
-      client-secret: 5DOuqNonv3iLQv2TGpcYrUD5XGguNJCi
+      client-secret: 1d9bpPexLi3bUgC8QkpzUiVLiioBzQ8k
 
 server:
   port: 8082
