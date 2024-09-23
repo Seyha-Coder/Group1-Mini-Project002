@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -100,5 +102,35 @@ public class KeycloakServiceImpl implements KeycloakService {
         }
         return modelMapper.map(userRepresentation, UserDto.class);
     }
+
+    @Override
+    public UserDto getUserByEmail(String email) {
+        UsersResource usersResource = keycloak.realm(realm).users();
+        List<UserRepresentation> userRepresentations = usersResource.search(null, null, null, email, null, null);
+        if (userRepresentations.isEmpty()) {
+            throw new CustomNotfoundException("User not found with email: " + email);
+        }
+        return modelMapper.map(userRepresentations.get(0), UserDto.class);
+    }
+
+
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        UsersResource usersResource = keycloak.realm(realm).users();
+        List<UserRepresentation> userRepresentations = usersResource.list();
+
+        List<UserDto> userDtos = userRepresentations.stream().map(userRepresentation -> {
+            UserDto userDto = new UserDto();
+            userDto.setUsername(userRepresentation.getUsername());
+            userDto.setFirstName(userRepresentation.getFirstName());
+            userDto.setLastName(userRepresentation.getLastName());
+            userDto.setEmail(userRepresentation.getEmail());
+            return userDto;
+        }).collect(Collectors.toList());
+
+        return userDtos;
+    }
+
 
 }

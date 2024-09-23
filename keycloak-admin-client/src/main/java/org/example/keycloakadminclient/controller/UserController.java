@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -72,6 +73,28 @@ public class UserController {
                 .message("Deleted Success")
                 .status(HttpStatus.OK)
                 .code(200)
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<ApiResponse> getUserByEmail(@PathVariable String email) {
+        UserDto userDto = keycloakService.getUserByEmail(email);
+        ApiResponse apiResponse = ApiResponse.builder()
+                .message("User with email "+ email +" get successfully.")
+                .status(HttpStatus.OK)
+                .code(200)
+                .payload(userDto)
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+    @GetMapping("/allUsers")
+    public ResponseEntity<ApiResponse> getAllUsers() {
+        List<UserDto> userDtos = keycloakService.getAllUsers();
+        ApiResponse apiResponse = ApiResponse.builder()
+                .message("Users get successfully.")
+                .status(HttpStatus.OK)
+                .code(200)
+                .payload(userDtos)
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }

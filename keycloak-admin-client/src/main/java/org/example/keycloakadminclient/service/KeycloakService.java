@@ -6,6 +6,8 @@ import org.example.keycloakadminclient.model.request.ResetPasswordRequest;
 import org.example.keycloakadminclient.model.request.UserRegisterRequest;
 import org.example.keycloakadminclient.model.request.UserUpdateRequest;
 
+import java.util.List;
+
 public interface KeycloakService {
     UserDto addUser(UserRegisterRequest request);
     UserDto getUserByName(String username);
@@ -14,4 +16,6 @@ public interface KeycloakService {
     void deleteUser(String userId);
     void resetPassword(String userId, ResetPasswordRequest request);
     UserDto getUserById(String userId);
+    UserDto getUserByEmail(String email);
+    List<UserDto> getAllUsers();
 }

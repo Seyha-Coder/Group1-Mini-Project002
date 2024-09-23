@@ -4,15 +4,17 @@ services:
   #  database
   postgres:
     image: postgres:latest
-    container_name: task-service-db
+    container_name: task-service_db
     environment:
-      POSTGRES_DB: task_service_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
+      POSTGRES_DB: task-service_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "5432:5432"
+    networks:
+      - zipkin-network
 
   #   database for keycloak
   postgres-keycloak:
