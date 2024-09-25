@@ -1,4 +1,4 @@
-package org.example.keycloakadminclient.config;
+package org.example.taskservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,21 +23,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         request -> request
                                 .requestMatchers(
-                                        "/auth/**",
-                                        "/keycloak-admin-client/v3/api-docs/**",
-                                        "/keycloak-admin-client/swagger-ui/**",
-                                        "/keycloak-admin-client/swagger-ui.html",
-                                        "/api/v1/auth/**"
+                                        "/task-service/v3/api-docs/**",
+                                        "/task-service/swagger-ui/**",
+                                        "/task-service/swagger-ui.html"
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(ex -> ex.jwt(withDefaults()));
         return http.build();
-    }
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        String jwkSetUri = "http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/certs";
-        return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
     }
 
 }
