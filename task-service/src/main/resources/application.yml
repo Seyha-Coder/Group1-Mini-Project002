@@ -2,18 +2,22 @@ spring:
   application:
     name: task-service
   datasource:
-    url: jdbc:postgresql://localhost:5433/task_service_db
+    url: jdbc:postgresql://localhost:5432/task_service_db
     username: postgres
     password: 123
   jpa:
     hibernate:
       ddl-auto: update
+      show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/mini-project
-          jwk-set-uri: http://localhost:8080/realms/mini-project/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/Mini-project002
+          jwk-set-uri: http://localhost:8080/realms/Mini-project002/protocol/openid-connect/certs
 eureka:
   client:
     service-url:
@@ -30,6 +34,6 @@ springdoc:
     path: /task-service/swagger-ui.html
     oauth:
       client-id: mini-project
-      client-secret: nWE45MqI8HIrT2OsFtftXaufWopuIvTM
+      client-secret: xF6dq9UAZXi4gOpe27K0cwG4EjKFRYYg
 server:
-  port: 8081
+  port: 8086

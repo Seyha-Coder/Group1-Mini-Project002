@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,12 +20,19 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     public Task getTaskById(UUID id) {
+
         return null;
     }
 
 
     @Override
     public Task createTask(TaskRequest taskRequest) {
+        Task task = new Task();
+        task.setTaskName(taskRequest.getTaskName());
+        task.setDescription(taskRequest.getDescription());
+        task.setCreatedBy(taskRequest.getCreatedBy());
+        task.setCreatedDate(taskRequest.getCreatedDate());
+
         return null;
     }
 

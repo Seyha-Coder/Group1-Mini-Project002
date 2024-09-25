@@ -5,11 +5,11 @@ import org.example.taskservice.model.TaskRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface TaskService {
     Task getTaskById(UUID id);
-    
 
     Task createTask(TaskRequest taskRequest);
 
