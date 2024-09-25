@@ -5,7 +5,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/Mini-project002
+          issuer-uri: http://localhost:8080/realms/Mini-Project002
 eureka:
   client:
     service-url:
@@ -17,7 +17,7 @@ openapi:
     url: http://localhost:9090
 keycloak:
   auth-server-url: http://localhost:8080
-  realm: Mini-project002
+  realm: Mini-Project002
   clientId: mini-project
   clientSecret: HAxG2Ins9fRHDrV2NMUKzOOLz5f0gAJp
 springdoc:

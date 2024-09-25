@@ -12,8 +12,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/mini-project
-          jwk-set-uri: http://localhost:8080/realms/mini-project/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/Mini-Project002
+          jwk-set-uri: http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/certs
 eureka:
   client:
     service-url:
@@ -30,6 +30,6 @@ springdoc:
     path: /task-service/swagger-ui.html
     oauth:
       client-id: mini-project
-      client-secret: nWE45MqI8HIrT2OsFtftXaufWopuIvTM
+      client-secret: HAxG2Ins9fRHDrV2NMUKzOOLz5f0gAJp
 server:
   port: 8081

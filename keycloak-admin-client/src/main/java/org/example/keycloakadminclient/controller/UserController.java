@@ -23,7 +23,7 @@ public class UserController {
     public UserController(KeycloakService keycloakService) {
         this.keycloakService = keycloakService;
     }
-    @GetMapping("{name}")
+    @GetMapping("/username/{name}")
     public ResponseEntity<ApiResponse> getUserByName(@PathVariable String name) {
         UserDto userDto = keycloakService.getUserByName(name);
         ApiResponse apiResponse = ApiResponse.builder()
@@ -45,7 +45,7 @@ public class UserController {
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> updateUser(@PathVariable String id, @RequestBody UserUpdateRequest request) {
         UserDto userDto = keycloakService.updateUser(id,request);
         ApiResponse apiResponse = ApiResponse.builder()
@@ -66,7 +66,7 @@ public class UserController {
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable String id) {
         keycloakService.deleteUser(id);
         ApiResponse apiResponse = ApiResponse.builder()
@@ -95,6 +95,17 @@ public class UserController {
                 .status(HttpStatus.OK)
                 .code(200)
                 .payload(userDtos)
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse> getUserById(@PathVariable String id) {
+        UserDto userDto = keycloakService.getUserById(id);
+        ApiResponse apiResponse = ApiResponse.builder()
+                .message("User get successfully.")
+                .status(HttpStatus.OK)
+                .code(200)
+                .payload(userDto)
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
