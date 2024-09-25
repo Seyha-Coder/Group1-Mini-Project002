@@ -32,7 +32,7 @@ public class KeycloakConfig {
                 .serverUrl(serverUrl)
                 .realm(realm)
                 .grantType(OAuth2Constants.CLIENT_CREDENTIALS)
-                .clientId(clientId)
+                .clientId("xF6dq9UAZXi4gOpe27K0cwG4EjKFRYYg")
                 .clientSecret(clientSecret)
                 .resteasyClient(resteasyClient)
                 .build();
