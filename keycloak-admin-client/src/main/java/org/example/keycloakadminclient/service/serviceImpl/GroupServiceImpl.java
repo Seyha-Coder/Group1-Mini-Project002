@@ -16,8 +16,6 @@ import org.keycloak.representations.idm.GroupRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -45,9 +43,9 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public GroupDto getGroupById(String groupId) {
         RealmResource realmResource = keycloak.realm(realm);
-        GroupsResource groupsResource = realmResource.groups();
-        GroupRepresentation group = groupsResource.group(groupId).toRepresentation();
-        return GroupDto.toGroupDto(group);
+        GroupResource groupsResource = realmResource.groups().group(groupId);
+        GroupRepresentation groupRepresentation = groupsResource.toRepresentation();
+        return GroupDto.toGroupDto(groupRepresentation);
     }
 
     @Override
@@ -56,6 +54,12 @@ public class GroupServiceImpl implements GroupService {
         GroupRepresentation groupRepresentation = new GroupRepresentation();
         groupRepresentation.setName(groupRequest.getGroupName());
         realmResource.groups().add(groupRepresentation);
+        List<GroupRepresentation> listGroup = realmResource.groups().query(groupRequest.getGroupName());
+        for (GroupRepresentation group : listGroup) {
+            if (group.getName().equals(groupRequest.getGroupName())) {
+                groupRepresentation.setId(group.getId());
+            }
+        }
         return GroupDto.toGroupDto(groupRepresentation);
     }
 
@@ -100,10 +104,7 @@ public class GroupServiceImpl implements GroupService {
         RealmResource realmResource = keycloak.realm(realm);
         GroupResource groupsResource = realmResource.groups().group(groupId.toString());
         GroupRepresentation groupRepresentation = groupsResource.toRepresentation();
-
-        // Fetch users in the group
         List<UserRepresentation> members = groupsResource.members().stream().toList();
-
         return UsersInGroupDto.usersInGroupDto(groupRepresentation, members);
     }
 }
