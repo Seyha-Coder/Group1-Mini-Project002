@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class User {
-    private String userId;
+    private String id;
     private  String username;
     private String email;
     private String firstName;
     private String lastName;
 
     public User ToEntity(){
-        return new User(this.userId,this.username,this.email,this.firstName,this.lastName);
+        return new User(this.id,this.username,this.email,this.firstName,this.lastName);
     }
 }

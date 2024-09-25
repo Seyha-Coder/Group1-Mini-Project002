@@ -29,7 +29,7 @@ public class TaskController {
                                          @RequestParam (defaultValue = "10") Integer pageSize,
                                          @RequestParam (defaultValue = "taskName") String sortBy,
                                          @RequestParam (defaultValue = "ASC") Sort.Direction orderBy){
-        List<Task> tasks = taskService.getAllTasks(pageNo,pageSize,sortBy,orderBy);
+        List<TaskResponse> tasks = taskService.getAllTasks(pageNo,pageSize,sortBy,orderBy);
         ApiResponse<?> apiResponse = ApiResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Get all task is successfully!")
@@ -39,7 +39,7 @@ public class TaskController {
     }
     @GetMapping("{id}")
     public ResponseEntity<?> getAllById(@PathVariable UUID id){
-        Task task = taskService.getTaskById(id);
+        TaskResponse task = taskService.getTaskById(id);
         APIResponse<?> apiResponse = APIResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Get by id task is successfully!")

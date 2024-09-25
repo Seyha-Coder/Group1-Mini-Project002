@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TaskService {
-    Task getTaskById(UUID id);
+    TaskResponse getTaskById(UUID id);
     
 
     TaskResponse createTask(TaskRequest taskRequest);
@@ -18,5 +18,5 @@ public interface TaskService {
 
     void deleteTask(UUID id);
 
-    List<Task> getAllTasks(Integer pageNo, Integer pageSize, String sortBy, Sort.Direction orderBy);
+    List<TaskResponse> getAllTasks(Integer pageNo, Integer pageSize, String sortBy, Sort.Direction orderBy);
 }
