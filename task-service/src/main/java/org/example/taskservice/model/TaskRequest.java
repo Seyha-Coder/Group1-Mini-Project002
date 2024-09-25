@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,4 +15,11 @@ public class TaskRequest {
     private UUID createdBy;
     private  UUID assignedTo;
     private UUID groupId;
+
+    public Task toEntity(){
+        return new Task(null,this.taskName,this.description,this.createdBy,this.assignedTo,this.groupId, LocalDateTime.now(),LocalDateTime.now());
+    }
+    public Task toEntity(UUID id){
+        return new Task(id,this.taskName,this.description,this.createdBy,this.assignedTo,this.groupId, LocalDateTime.now(),LocalDateTime.now());
+    }
 }

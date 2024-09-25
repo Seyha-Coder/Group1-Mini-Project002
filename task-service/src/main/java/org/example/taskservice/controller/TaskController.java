@@ -1,9 +1,11 @@
 package org.example.taskservice.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.example.common.utils.ApiResponse;
 import org.example.taskservice.model.APIResponse;
 import org.example.taskservice.model.Task;
 import org.example.taskservice.model.TaskRequest;
+import org.example.taskservice.model.TaskResponse;
 import org.example.taskservice.service.TaskService;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -23,12 +25,12 @@ public class TaskController {
         this.taskService = taskService;
     }
     @GetMapping
-    public ResponseEntity<?> getAllTasks(@RequestParam (defaultValue = "0") Long pageNo,
-                                         @RequestParam (defaultValue = "10") Long pageSize,
+    public ResponseEntity<?> getAllTasks(@RequestParam (defaultValue = "0") Integer pageNo,
+                                         @RequestParam (defaultValue = "10") Integer pageSize,
                                          @RequestParam (defaultValue = "taskName") String sortBy,
-                                         @RequestParam (defaultValue = "ASC") Sort.Direction sortDirection){
-        List<Task> tasks = taskService.getAllTasks(pageNo,pageSize,sortBy,sortDirection);
-        APIResponse<?> apiResponse = APIResponse.builder()
+                                         @RequestParam (defaultValue = "ASC") Sort.Direction orderBy){
+        List<Task> tasks = taskService.getAllTasks(pageNo,pageSize,sortBy,orderBy);
+        ApiResponse<?> apiResponse = ApiResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Get all task is successfully!")
                 .payload(tasks)
@@ -47,7 +49,7 @@ public class TaskController {
     }
     @PostMapping
     public ResponseEntity<?> createTask(@RequestBody TaskRequest taskRequest){
-        Task task = taskService.createTask(taskRequest);
+        TaskResponse task = taskService.createTask(taskRequest);
         APIResponse<?> apiResponse = APIResponse.builder()
                 .status(HttpStatus.CREATED)
                 .message("Created task successfully!")
@@ -57,7 +59,7 @@ public class TaskController {
     }
     @PutMapping("{id}")
     public ResponseEntity<?> updateTask(@RequestBody TaskRequest taskRequest , @PathVariable UUID id){
-        Task task = taskService.updateTask(taskRequest,id);
+        TaskResponse task = taskService.updateTask(taskRequest,id);
         APIResponse<?> apiResponse = APIResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Updated successfully")
@@ -67,11 +69,11 @@ public class TaskController {
     }
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteTask(@PathVariable UUID id){
-        Task task = taskService.deleteTask(id);
+        taskService.deleteTask(id);
         APIResponse<?> apiResponse = APIResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Deleted by id successfully!")
-                .payload(task)
+                .payload(null)
                 .build();
         return ResponseEntity.ok(apiResponse);
     }

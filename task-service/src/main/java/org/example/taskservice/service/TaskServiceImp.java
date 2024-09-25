@@ -1,8 +1,14 @@
 package org.example.taskservice.service;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.example.taskservice.model.Task;
 import org.example.taskservice.model.TaskRequest;
+import org.example.taskservice.model.TaskResponse;
+import org.example.taskservice.model.User;
 import org.example.taskservice.repository.TaskRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,27 +25,32 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     public Task getTaskById(UUID id) {
-        return null;
+        Task task = taskRepository.findById(id).orElse(null);
+        return task;
     }
 
 
     @Override
-    public Task createTask(TaskRequest taskRequest) {
-        return null;
+    public TaskResponse createTask(TaskRequest taskRequest) {
+        Task task = taskRepository.save(taskRequest.toEntity());
+        return task.toResponse(null,null,null);
     }
 
     @Override
-    public Task updateTask(TaskRequest taskRequest, UUID id) {
-        return null;
+    public TaskResponse updateTask(TaskRequest taskRequest, UUID id) {
+        Task updateTask = taskRepository.save(taskRequest.toEntity(id));
+        return updateTask.toResponse(null,null,null);
     }
 
     @Override
-    public Task deleteTask(UUID id) {
-        return null;
+    public void deleteTask(UUID id) {
+        taskRepository.deleteById(id);
     }
 
     @Override
-    public List<Task> getAllTasks(Long pageNo, Long pageSize, String sortBy, Sort.Direction sortDirection) {
-        return null;
+    public List<Task> getAllTasks(Integer pageNo, Integer pageSize, String sortBy, Sort.Direction orderBy) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize,Sort.by(orderBy,sortBy));
+        Page<Task> tasks = taskRepository.findAll(pageable);
+        return tasks.getContent();
     }
 }

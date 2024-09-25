@@ -27,4 +27,8 @@ public class Task {
     private LocalDateTime createdDate;
     private LocalDateTime lastModified;
 
+    public TaskResponse toResponse(User createdBy , User assignedTo , Group group){
+        return new TaskResponse(this.taskId,this.taskName,this.description,createdBy,assignedTo,group,this.createdDate,this.lastModified);
+    }
+
 }
