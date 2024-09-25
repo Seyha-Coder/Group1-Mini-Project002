@@ -122,6 +122,7 @@ public class KeycloakServiceImpl implements KeycloakService {
 
         List<UserDto> userDtos = userRepresentations.stream().map(userRepresentation -> {
             UserDto userDto = new UserDto();
+            userDto.setId(userRepresentation.getId());
             userDto.setUsername(userRepresentation.getUsername());
             userDto.setFirstName(userRepresentation.getFirstName());
             userDto.setLastName(userRepresentation.getLastName());

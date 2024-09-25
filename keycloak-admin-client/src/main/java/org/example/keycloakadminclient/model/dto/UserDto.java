@@ -10,6 +10,7 @@ import org.keycloak.representations.idm.UserRepresentation;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
+    private String id;
     private String username;
     private String email;
     private String firstName;
@@ -17,6 +18,7 @@ public class UserDto {
 
     public static UserDto toUserDto(UserRepresentation userRepresentation) {
         UserDto userDto = new UserDto();
+        userDto.setId(userRepresentation.getId());
         userDto.setUsername(userRepresentation.getUsername());
         userDto.setEmail(userRepresentation.getEmail());
         userDto.setFirstName(userRepresentation.getFirstName());
