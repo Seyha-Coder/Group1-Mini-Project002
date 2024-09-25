@@ -106,11 +106,8 @@ public class KeycloakServiceImpl implements KeycloakService {
     @Override
     public UserDto getUserByEmail(String email) {
         UsersResource usersResource = keycloak.realm(realm).users();
-        List<UserRepresentation> userRepresentations = usersResource.search(null, null, null, email, null, null);
-        if (userRepresentations.isEmpty()) {
-            throw new CustomNotfoundException("User not found with email: " + email);
-        }
-        return modelMapper.map(userRepresentations.get(0), UserDto.class);
+        UserRepresentation userRepresentations = usersResource.searchByEmail(email,true).getFirst();
+        return modelMapper.map(userRepresentations, UserDto.class);
     }
 
 
@@ -122,6 +119,7 @@ public class KeycloakServiceImpl implements KeycloakService {
 
         List<UserDto> userDtos = userRepresentations.stream().map(userRepresentation -> {
             UserDto userDto = new UserDto();
+            userDto.setId(userRepresentation.getId());
             userDto.setUsername(userRepresentation.getUsername());
             userDto.setFirstName(userRepresentation.getFirstName());
             userDto.setLastName(userRepresentation.getLastName());
