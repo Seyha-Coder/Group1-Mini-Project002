@@ -1,7 +1,7 @@
 package org.example.taskservice.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.example.taskservice.model.APIResponse;
+import org.example.common.utils.ApiResponse;
 import org.example.taskservice.model.Task;
 import org.example.taskservice.model.TaskRequest;
 import org.example.taskservice.service.TaskService;
@@ -28,7 +28,7 @@ public class TaskController {
                                          @RequestParam (defaultValue = "taskName") String sortBy,
                                          @RequestParam (defaultValue = "ASC") Sort.Direction sortDirection){
         List<Task> tasks = taskService.getAllTasks(pageNo,pageSize,sortBy,sortDirection);
-        APIResponse<?> apiResponse = APIResponse.builder()
+        ApiResponse<?> apiResponse = ApiResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Get all task is successfully!")
                 .payload(tasks)
@@ -38,7 +38,7 @@ public class TaskController {
     @GetMapping("{id}")
     public ResponseEntity<?> getAllById(@PathVariable UUID id){
         Task task = taskService.getTaskById(id);
-        APIResponse<?> apiResponse = APIResponse.builder()
+        ApiResponse<?> apiResponse = ApiResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Get by id task is successfully!")
                 .payload(task)
@@ -48,7 +48,7 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<?> createTask(@RequestBody TaskRequest taskRequest){
         Task task = taskService.createTask(taskRequest);
-        APIResponse<?> apiResponse = APIResponse.builder()
+        ApiResponse<?> apiResponse = ApiResponse.builder()
                 .status(HttpStatus.CREATED)
                 .message("Created task successfully!")
                 .payload(task)
@@ -58,7 +58,7 @@ public class TaskController {
     @PutMapping("{id}")
     public ResponseEntity<?> updateTask(@RequestBody TaskRequest taskRequest , @PathVariable UUID id){
         Task task = taskService.updateTask(taskRequest,id);
-        APIResponse<?> apiResponse = APIResponse.builder()
+        ApiResponse<?> apiResponse = ApiResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Updated successfully")
                 .payload(task)
@@ -68,7 +68,7 @@ public class TaskController {
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteTask(@PathVariable UUID id){
         Task task = taskService.deleteTask(id);
-        APIResponse<?> apiResponse = APIResponse.builder()
+        ApiResponse<?> apiResponse = ApiResponse.builder()
                 .status(HttpStatus.OK)
                 .message("Deleted by id successfully!")
                 .payload(task)
