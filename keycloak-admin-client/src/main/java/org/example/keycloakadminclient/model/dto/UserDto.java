@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.keycloak.representations.idm.GroupRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +17,8 @@ public class UserDto {
     private String email;
     private String firstName;
     private String lastName;
+    private String createdAt;
+    private String lastModified;
 
     public static UserDto toUserDto(UserRepresentation userRepresentation) {
         UserDto userDto = new UserDto();
@@ -23,6 +27,13 @@ public class UserDto {
         userDto.setEmail(userRepresentation.getEmail());
         userDto.setFirstName(userRepresentation.getFirstName());
         userDto.setLastName(userRepresentation.getLastName());
+
+        if (userRepresentation.getAttributes() != null) {
+            userDto.setCreatedAt(userRepresentation.getAttributes().getOrDefault("createdAt", List.of("")).get(0));
+            userDto.setLastModified(userRepresentation.getAttributes().getOrDefault("lastModified", List.of("")).get(0));
+        }
+
         return userDto;
     }
+
 }
