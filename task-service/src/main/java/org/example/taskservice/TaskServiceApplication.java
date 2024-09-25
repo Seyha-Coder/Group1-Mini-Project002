@@ -29,7 +29,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
         type = SecuritySchemeType.OAUTH2,
         flows = @OAuthFlows(
                 clientCredentials = @OAuthFlow(
-                        tokenUrl ="http://localhost:8080/realms/mini-project/protocol/openid-connect/token"
+                        tokenUrl ="http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/token"
                 )
         ),
         in = SecuritySchemeIn.HEADER
