@@ -15,8 +15,8 @@ spring:
       #        ----request routing
       routes:
         - id: keycloak-admin-client
-          uri: http://localhost:8082
-#          uri: lb://KEYCLOAK-ADMIN-CLIENT
+#          uri: http://localhost:8082
+          uri: lb://KEYCLOAK-ADMIN-CLIENT
           predicates:
             - Path=/api/v1/**, /keycloak-admin-client/v3/api-docs
         #          filters:
