@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Group {
-    private Long groupId;
-    private String university;
+    private String groupId;
+    private String groupName;
 }
