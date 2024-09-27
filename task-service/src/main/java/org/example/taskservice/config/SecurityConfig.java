@@ -14,7 +14,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -32,5 +31,4 @@ public class SecurityConfig {
                 .oauth2ResourceServer(ex -> ex.jwt(withDefaults()));
         return http.build();
     }
-
 }

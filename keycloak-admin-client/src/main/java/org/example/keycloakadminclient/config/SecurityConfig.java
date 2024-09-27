@@ -27,9 +27,10 @@ public class SecurityConfig {
                                         "/keycloak-admin-client/v3/api-docs/**",
                                         "/keycloak-admin-client/swagger-ui/**",
                                         "/keycloak-admin-client/swagger-ui.html",
-                                        "/api/v1/auth/**"
+                                        "/api/v1/auth/**",
+                                        "api/v1/user/**"
                                 ).permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(ex -> ex.jwt(withDefaults()));
         return http.build();

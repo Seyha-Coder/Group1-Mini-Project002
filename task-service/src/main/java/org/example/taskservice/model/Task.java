@@ -26,5 +26,4 @@ public class Task {
     private UUID groupId;
     private LocalDateTime createdDate;
     private LocalDateTime lastModified;
-
 }
