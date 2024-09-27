@@ -1,5 +1,12 @@
 spring:
   application:
     name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Seyha-Web-Developer/mini-project-configuration.git
+          default-label: master
+
 server:
-  port: 8083
+  port: 8088

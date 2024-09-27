@@ -30,7 +30,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
         flows = @OAuthFlows(
                 clientCredentials = @OAuthFlow(
                         tokenUrl ="http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/token"
-                ),
+                )
+                ,
                 password = @OAuthFlow(
                         tokenUrl ="http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/token"
                 )

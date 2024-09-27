@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: keycloak-admin-client
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/Mini-Project002
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+openapi:
+  service:
+    title: keycloak-admin-client doc
+    version: 1.0.0
+    url: http://localhost:9090
+keycloak:
+  auth-server-url: http://localhost:8080
+  realm: Mini-Project002
+  clientId: mini-project
+  clientSecret: 1d9bpPexLi3bUgC8QkpzUiVLiioBzQ8k
+springdoc:
+  api-docs:
+    path: /keycloak-admin-client/v3/api-docs
+  swagger-ui:
+    path: /keycloak-admin-client/swagger-ui.html
+    oauth:
+      client-id: mini-project
+      client-secret: 1d9bpPexLi3bUgC8QkpzUiVLiioBzQ8k
+
+server:
+  port: 8082
