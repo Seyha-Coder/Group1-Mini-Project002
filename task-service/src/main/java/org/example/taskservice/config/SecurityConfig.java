@@ -31,4 +31,9 @@ public class SecurityConfig {
                 .oauth2ResourceServer(ex -> ex.jwt(withDefaults()));
         return http.build();
     }
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        String jwkSetUri = "http://localhost:8080/realms/Mini-Project002/protocol/openid-connect/certs";
+        return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
+    }
 }

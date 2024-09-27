@@ -16,7 +16,7 @@ public class TaskRequest {
     private  UUID assignedTo;
     private UUID groupId;
 
-    public Task toDto(TaskRequest taskRequest) {
+    public Task toEntity(TaskRequest taskRequest) {
        Task task = new Task();
         task.setTaskName(taskRequest.getTaskName());
         task.setDescription(taskRequest.getDescription());

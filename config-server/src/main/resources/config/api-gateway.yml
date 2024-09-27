@@ -1,0 +1,55 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 20000
+        response-timeout: 10s
+      #        ----request routing
+      routes:
+        - id: keycloak-admin-client
+          #          uri: http://localhost:8082
+          uri: lb://KEYCLOAK-ADMIN-CLIENT
+          predicates:
+            - Path=/api/v1/**, /keycloak-admin-client/v3/api-docs
+        #          filters:
+        #            - RewritePath=/keycloak-admin-client/(?<segment>.*), /api/v1/${segment}
+
+        - id: task-service
+          uri: lb://TASK-SERVICE
+          predicates:
+            - Path=/api/v1/task/**, /task-service/v3/api-docs
+      #                filters:
+      #                  - RewritePath=/task-service/(?<segment>.*), /api/v1/task/${segment}
+      default-filters:
+        - name: DedupeResponseHeader
+          args:
+            strategy: RETAIN_FIRST
+      discovery:
+        locator:
+          lower-case-service-id: true
+#          ----auto mapping
+#          enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: /keycloak-admin-client/v3/api-docs
+        name: KEYCLOAK ADMIN CLIENT
+      - url: /task-service/v3/api-docs
+        name: Task Service
+management:
+  tracing:
+    sampling:
+      probability: 1

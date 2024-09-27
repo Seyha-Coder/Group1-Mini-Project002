@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: task-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/task-service_db
+    username: postgres
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/Mini-Project
+          jwk-set-uri: http://localhost:8080/realms/Mini-Project/protocol/openid-connect/certs
+management:
+  tracing:
+    sampling:
+      probability: 1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+openapi:
+  service:
+    title: task-service doc
+    version: 1.0.0
+    url: http://localhost:8081
+springdoc:
+  api-docs:
+    path: /task-service/v3/api-docs
+  swagger-ui:
+    path: /task-service/swagger-ui.html
+    oauth:
+      client-id: mini-project
+      client-secret: 1d9bpPexLi3bUgC8QkpzUiVLiioBzQ8k
+server:
+  port: 8081
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      keyscloak-admin-client:               # Replace 'yourService' with the service name you want the circuit breaker for
+        registerHealthIndicator: true
+        slidingWindowType: TIME_BASED   # Choose either TIME_BASED or COUNT_BASED
+        slidingWindowSize: 10           # Number of calls or time duration in seconds to evaluate the failure rate
+        minimumNumberOfCalls: 5         # Minimum number of calls before the circuit breaker evaluates failure rate
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s    # Time the circuit breaker will remain open before transitioning to half-open
+        failureRateThreshold: 50        # Percentage of failure rate to trigger the circuit breaker to open
+        slowCallRateThreshold: 50       # Percentage of slow calls to trigger the circuit breaker to open
+        slowCallDurationThreshold: 2s   # Time limit to consider a call as slow
+        automaticTransitionFromOpenToHalfOpenEnabled: true

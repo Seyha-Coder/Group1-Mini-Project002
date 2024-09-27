@@ -17,9 +17,9 @@ public class TaskDto {
     private String taskId;
     private String taskName;
     private String description;
-    private User createdBy;
-    private User assignedTo;
-    private Group groupId;
+    private UserDto createdBy;
+    private UserDto assignedTo;
+    private GroupDto groupId;
 //    public static TaskDto totaskDto( TaskRequest taskRequest) {
 //        Task task = new Task();
 //        task.setTaskName(taskRequest.getTaskName());
